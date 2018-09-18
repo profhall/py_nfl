@@ -50,6 +50,7 @@ def get_live_game_stats(**kwargs):
         away_team_abbr = away_team['abbr']
         away_score = away_team['score']
 
+        print("Game(game_id={}, home={} away={}, hscore={}, ascore={}, qtr={}, time={})".format(game_id,home_team_abbr,away_team_abbr,home_team['score'],away_team['score'],allgame['qtr'],allgame['clock']))
         curr_game = Game(game_id=game_id, home=home_team_abbr, away=away_team_abbr, hscore=home_team['score'], ascore=away_team['score'], qtr=allgame['qtr'], time=allgame['clock'])
         Games.append(curr_game)
 
@@ -83,9 +84,9 @@ def get_live_game_stats(**kwargs):
 
 
 
-        '''Quarter Summary Data'''
-        print('keys in quarter dictionary...')
-        print(qtr.keys())
+        '''Current Quarter'''
+        print('Current quarter...')
+        print(quarter)
         #print(json.dumps(qtr,indent=3))
 
         '''Score Summary Data'''
@@ -160,8 +161,8 @@ def getCurrentWeekGameData():
             print("Gamecenter URL : ", game_stats_url)
             if (response):
                 game_stats = response.json()
-                print("Stats: ", json.dumps(game_stats[game_id],indent=2))
-                print(game_stats[game_id].keys())
+                #print("Stats: ", json.dumps(game_stats[game_id],indent=2))
+                #print(game_stats[game_id].keys())
             else:
                 print("No Stats Yet")
 
