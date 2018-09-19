@@ -1,6 +1,8 @@
 '''
+
 API key explanation
 crntdrv = current drive
+
 '''
 
 
@@ -15,7 +17,7 @@ from game import Game
 Games=[]
 
 def get_live_game_stats(**kwargs):
-    print("From def get_live_game_stats: ", kwargs)
+   # print("From def get_live_game_stats: ", kwargs)
     #http://www.nfl.com/liveupdate/game-center/2017012200/2017012200_gtd.json
 
     game_id = kwargs['game_id']
@@ -50,9 +52,7 @@ def get_live_game_stats(**kwargs):
         away_team_abbr = away_team['abbr']
         away_score = away_team['score']
 
-        print("Game(game_id={}, home={} away={}, hscore={}, ascore={}, qtr={}, time={})".format(game_id,home_team_abbr,away_team_abbr,home_team['score'],away_team['score'],allgame['qtr'],allgame['clock']))
-        curr_game = Game(game_id=game_id, home=home_team_abbr, away=away_team_abbr, hscore=home_team['score'], ascore=away_team['score'], qtr=allgame['qtr'], time=allgame['clock'])
-        Games.append(curr_game)
+
 
         '''-----Home Team Stats----'''
         Home[str(game_count)] = {}
@@ -82,21 +82,25 @@ def get_live_game_stats(**kwargs):
 
         away_team_stats = Away[str(game_count)]
 
+        #print("Game(game_id={}, home={} away={}, hscore={}, ascore={}, qtr={}, time={})".format(game_id, home_team_abbr,away_team_abbr,home_team['score'],away_team['score'],allgame['qtr'],allgame['clock']))
 
+        curr_game = Game(game_id=game_id, home=home_team_abbr, away=away_team_abbr, hscore=home_team['score'],
+                         ascore=away_team['score'], qtr=allgame['qtr'], time=allgame['clock'], scoring_summary=score_summary, game_drives=drives)
+        Games.append(curr_game)
 
         '''Current Quarter'''
-        print('Current quarter...')
-        print(quarter)
+        #print('Current quarter...')
+        #print(quarter)
         #print(json.dumps(qtr,indent=3))
 
         '''Score Summary Data'''
-        print('keys in score summary dictionary...')
-        print(score_summary.keys())
+        #print('keys in score summary dictionary...')
+        #print(score_summary.keys())
         #print(json.dumps(score_summary,indent=3))
 
         '''All Drives Summary Data'''
-        print('keys in drives dictionary...')
-        print(drives.keys())
+        #print('keys in drives dictionary...')
+        #print(drives.keys())
         #print(json.dumps(drives,indent=3))
 
 
@@ -141,7 +145,7 @@ def games_by_year_and_week(**kwargs):
             print(away_team, home_team,game_id,game_day,game_time)
             #return {"vteam":away_team, "hteam":home_team, "gameday": game_day, "game_id": game_id, "gametime":game_time}
 
-        print(Games[len(Games) - 1].away,' @ ',Games[len(Games) - 1].home)
+        #print(Games[len(Games) - 1].away,' @ ',Games[len(Games) - 1].home)
 
 
     return Games
@@ -170,4 +174,4 @@ def getCurrentWeekGameData():
         print("Error with Token")
         return("Error with Token\n")
 
-getCurrentWeekGameData()
+#getCurrentWeekGameData()
